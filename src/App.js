@@ -1,12 +1,13 @@
 import React, { Fragment, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchData } from './reducers/workouts'
 
-const App = (props) => {
-  const { workouts } = props
+const App = () => {
+  const workouts = useSelector(state => state.workouts)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    props.fetchWorkoutData()
+    dispatch(fetchData())
   }, [])
 
   console.log('workout reducer state', workouts)
@@ -17,16 +18,4 @@ const App = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    workouts: state.workouts
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchWorkoutData: () => dispatch(fetchData())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
