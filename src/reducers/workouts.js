@@ -1,4 +1,4 @@
-import { FETCH_ALL } from '../constants/workout/types'
+import { FETCH_ALL, CREATE } from '../constants/workout/types'
 import workoutService from '../services/workouts'
 
 const initialState = {
@@ -16,6 +16,12 @@ const workoutReducer = (state = initialState, action) => {
         data: action.data
       }
     }
+    case CREATE: {
+      return {
+        ...state,
+        data: [...state.data, action.payload]
+      }
+    }
     default:
       return { ...state }
   }
@@ -28,6 +34,16 @@ export const fetchData = () => {
     dispatch({
       type: FETCH_ALL,
       data: workouts
+    })
+  }
+}
+
+export const createWorkout = (workoutData) => {
+  return async (dispatch) => {
+    const responseWorkoutData = await workoutService.create(workoutData)
+    dispatch({
+      type: CREATE,
+      payload: responseWorkoutData
     })
   }
 }
