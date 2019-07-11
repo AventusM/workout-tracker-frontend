@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createWorkout, fetchData } from '../reducers/workouts'
+import { Formik, FieldArray, Form } from 'formik'
 
 
 // 2 parts
@@ -9,20 +10,24 @@ import { createWorkout, fetchData } from '../reducers/workouts'
 const WorkoutForm = () => {
   const dispatch = useDispatch()
 
-  const submitWorkout = (event) => {
-    event.preventDefault()
-    try {
-      dispatch(createWorkout())
-    } catch (exception) {
-      console.log(exception)
-    }
-  }
-
   return (
-    <form onSubmit={submitWorkout}>
-      FORM
-      <button type="submit">SUBMIT A WORKOUT</button>
-    </form>
+    <Formik initialValues={{ results: [] }} onSubmit={() => { }}>
+      {({ values }) => (
+        <Form>
+          <input />
+          <FieldArray name="results">{({ push }) => (
+            <div>
+              <button type="button" onClick={() => push()}>add to list</button>
+            </div>
+          )}
+          </FieldArray>
+          <button type="submit">submit</button>
+          <pre>
+            {JSON.stringify(values, null, 2)}
+          </pre>
+        </Form>
+      )}
+    </Formik>
   )
 }
 
