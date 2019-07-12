@@ -1,21 +1,9 @@
 import React, { Fragment, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { fetchData } from './reducers/workouts'
 import { WorkoutForm, WorkoutList } from './components/Workout'
-
-const NavBar = (props) => {
-  return (
-    <ul>
-      <li>
-        <Link to="/create">create a workout</Link>
-      </li>
-      <li>
-        <Link to="/workouts">workouts</Link>
-      </li>
-    </ul>
-  )
-}
+import { NavBar } from './components/Navbar'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -24,7 +12,6 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchData())
   }, [])
-
 
   return (
     <Router>
