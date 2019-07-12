@@ -11,10 +11,10 @@ const WorkoutForm = () => {
   const dispatch = useDispatch()
 
   return (
-    <Formik initialValues={{ results: [{ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0 }] }}
-      onSubmit={(values) => { 
-        dispatch(createWorkout({results: values.results})) 
-        }}>
+    <Formik initialValues={{ results: [] }}
+      onSubmit={(values) => {
+        dispatch(createWorkout({ results: values.results }))
+      }}>
 
       {({ values, handleChange }) => (
         <Form>
@@ -80,7 +80,11 @@ const WorkoutForm = () => {
               })}
 
               {/* Push requires default values i guess... */}
-              <button type="button" onClick={() => push({ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0 })}>add to list</button>
+              <button type="button" onClick={() => push({ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0 })}>
+                {values.results.length === 0
+                  ? 'create'
+                  : 'add to list'}
+              </button>
             </Fragment>
           )}
           </FieldArray>
@@ -95,16 +99,50 @@ const WorkoutForm = () => {
 }
 
 const WorkoutList = () => {
-  const workouts = useSelector(state => state.workouts)
-  return (
-    <Fragment>LIST</Fragment>
+  const { data, loaded } = useSelector(state => state.workouts)
+  console.log('data', data)
+  return (loaded &&
+    <div>
+      {data.map(workout =>
+        <SingleWorkout
+          key={workout._id}
+          results={workout.results} />
+      )}
+    </div>
   )
 }
 
-const WorkoutItem = (props) => {
+const SingleWorkout = (props) => {
+  const { results } = props
+  console.log('results', results)
   return (
-    <Fragment>ITEM</Fragment>
+    <ul>
+      {results.map(result =>
+        <SingleWorkoutResults
+          key={result._id}
+          name={result.name}
+          type={result.type}
+          weight={result.weight}
+          repetitions={result.repetitions}
+          sets={result.sets}
+        />
+      )}
+    </ul>
   )
 }
 
-export { WorkoutForm, WorkoutItem, WorkoutList }
+const SingleWorkoutResults = (props) => {
+  const { name, type, weight, repetitions, sets } = props
+  console.log('props within single workout', props)
+  return (
+    <li>
+      <div>Discipline: {name}</div>
+      <div>Type: {type}</div>
+      <div>Weight: {weight}kg</div>
+      <div>Reps: {repetitions}</div>
+      <div>Sets: {sets}</div>
+    </li>
+  )
+}
+
+export { WorkoutForm, WorkoutList }
