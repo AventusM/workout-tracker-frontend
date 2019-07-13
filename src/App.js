@@ -1,7 +1,14 @@
 import React, { Fragment, useEffect } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { fetchData } from './reducers/workouts'
+import { fetchWorkouts } from './reducers/workouts'
+
+// SHOULD BE CHANGED TO GET JUST ONE
+// SHOULD BE CHANGED TO GET JUST ONE
+import { fetchQuotes } from './reducers/quotes'
+// SHOULD BE CHANGED TO GET JUST ONE
+// SHOULD BE CHANGED TO GET JUST ONE
+
 import { WorkoutForm, WorkoutList } from './components/Workout/Workout'
 import { NavBar } from './components/Navbar/Navbar'
 import { NonAuthIndex } from './components/Index/NonAuthIndex'
@@ -11,7 +18,8 @@ const App = () => {
 
   // Should probably remain here
   useEffect(() => {
-    dispatch(fetchData())
+    dispatch(fetchWorkouts())
+    dispatch(fetchQuotes())
   }, [])
 
   return (

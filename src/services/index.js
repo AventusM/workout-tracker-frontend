@@ -1,12 +1,11 @@
 import axios from 'axios'
-const baseUrl = '/api/workouts'
 
-const getAll = async () => {
+const getAll = async (baseUrl) => {
   const response = await axios.get(baseUrl)
   return response.data
 }
 
-const create = async (payload) => {
+const create = async (baseUrl, payload) => {
   const response = await axios.post(baseUrl, payload)
   return response.data
 }

@@ -1,5 +1,6 @@
 import { FETCH_ALL, CREATE } from '../constants/workout/types'
-import workoutService from '../services/workouts'
+import { BASE_URL } from '../constants/workout/url'
+import workoutService from '../services/index' // Can be named whatever. workoutService is fitting here though.
 
 const initialState = {
   loaded: false,
@@ -27,10 +28,10 @@ const workoutReducer = (state = initialState, action) => {
   }
 }
 
-export const fetchData = () => {
+export const fetchWorkouts = () => {
   // Async function allowed by redux thunk
   return async (dispatch) => {
-    const workouts = await workoutService.getAll()
+    const workouts = await workoutService.getAll(BASE_URL)
     dispatch({
       type: FETCH_ALL,
       data: workouts
@@ -40,7 +41,7 @@ export const fetchData = () => {
 
 export const createWorkout = (workoutData) => {
   return async (dispatch) => {
-    const responseWorkoutData = await workoutService.create(workoutData)
+    const responseWorkoutData = await workoutService.create(BASE_URL, workoutData)
     dispatch({
       type: CREATE,
       payload: responseWorkoutData

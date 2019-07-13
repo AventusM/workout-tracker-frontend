@@ -6,7 +6,7 @@
 body {
   background: url('./img/weights.jpg') no-repeat center center fixed;
   background-size: cover;
-  color: #1d1d1d;
+  color: white;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -16,9 +16,6 @@ body {
 }
 
 .container {
-  background-color:rgba(255, 255, 255, 0.9);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-  height: 100%;
   margin: 0 auto;
   max-width: 960px;
   min-height: calc(100vh - 10px - 30px - 50px);
@@ -62,11 +59,53 @@ nav a {
 .navbar_actions_desktop {
 }
 
+.non_auth_button_container {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  align-items: center;
+  color: white;
+  display: flex;
+  font-weight: 600;
+  justify-content: center;
+  height: 30px;
+  padding: 8px 4px;
+  text-transform: uppercase;
+  width: 100px;
+}
+
+.login_button {
+  background: transparent;
+  border: 2px solid rgb(42, 42, 196);
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.55);
+}
+
+.register_button {
+  background: rgb(42, 42, 196);
+  border: 2px solid rgb(42, 42, 196);
+  margin-right: 15px;
+}
+
+.quote {
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.55);
+}
+
 @media screen and (max-width: 600px) {
   .navbar_title_desktop {
     visibility: hidden;
   }
-  .navbar_actions_desktop{
+  .navbar_actions_desktop {
     visibility: hidden;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .quote {
+    text-align: center;
+  }
+  .non_auth_button_container {
+    justify-content: center;    
   }
 }
