@@ -35,31 +35,33 @@ const NavLinks = (props) => {
       </li>
 
       <li>
-        <Title />
+        <UserButtons />
       </li>
 
       <li>
-        <UserButtons />
+        <Title title={'about workout tracker'} />
       </li>
 
     </ul>
   )
 }
 
-const Title = () => {
+const Title = (props) => {
+  const { title, className } = props
   return (
-    <div className="navbar_title">
-      WORKOUT TRACKER
-    </div>
+    <div className={className}>
+      {title}
+    </div >
   )
 }
 
 // Put fixed width to this div
-const UserButtons = () => {
+const UserButtons = (props) => {
+  const { className } = props
   return (
-    <ul className="navbar_join_links">
+    <ul className={className}>
       SOCIALS
-    </ul>
+    </ul >
   )
 }
 
@@ -78,8 +80,8 @@ const NavBar = (props) => {
       <Menu changeMenuStatus={toggleMenu} menuStatus={menuStatus} />
       {menuStatus === false ?
         <Fragment>
-          <Title />
-          <UserButtons />
+          <Title title={'WORKOUT TRACKER'} className="navbar_title_desktop" />
+          <UserButtons className="navbar_actions_desktop" />
         </Fragment>
         : null}
     </nav >

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { fetchData } from './reducers/workouts'
 import { WorkoutForm, WorkoutList } from './components/Workout/Workout'
 import { NavBar } from './components/Navbar/Navbar'
+import { NonAuthIndex } from './components/Index/NonAuthIndex'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -17,6 +18,7 @@ const App = () => {
     <Router>
       <NavBar />
       <div className="container">
+        <Route exact path="/" component={NonAuthIndex} />
         <Route exact path="/create" component={WorkoutForm} />
         <Route exact path="/workouts" component={WorkoutList} />
       </div>
