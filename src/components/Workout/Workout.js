@@ -11,7 +11,7 @@ const WorkoutForm = () => {
   const dispatch = useDispatch()
 
   return (
-    <Formik initialValues={{ results: [] }}
+    <Formik initialValues={{ results: [{name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0}] }}
       onSubmit={(values) => {
         dispatch(createWorkout({ results: values.results }))
       }}>
@@ -19,7 +19,7 @@ const WorkoutForm = () => {
       {({ values, handleChange }) => (
         <Form className="centered_form">
           <FieldArray name="results">{({ push }) => (
-            <Fragment>
+            <div className="workout_field_and_button_container">
               {values.results.map((result, index) => {
                 return (
                   <div className="workout_field_container" key={index}>
@@ -84,11 +84,9 @@ const WorkoutForm = () => {
 
               {/* Push requires default values i guess... */}
               <button type="button" onClick={() => push({ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0 })}>
-                {values.results.length === 0
-                  ? 'create'
-                  : 'add to list'}
+                add to list
               </button>
-            </Fragment>
+            </div>
           )}
           </FieldArray>
           <button type="submit">submit</button>
