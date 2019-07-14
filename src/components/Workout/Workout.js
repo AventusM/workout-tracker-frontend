@@ -55,6 +55,7 @@ const WorkoutForm = () => {
                     <div className="workout_field_item_container">
                       <label>Weight (kg)</label>
                       <Field
+                        type="number"
                         name={`results[${index}].weight`}
                         value={result.weight}
                         onChange={handleChange} />
@@ -63,6 +64,7 @@ const WorkoutForm = () => {
                     <div className="workout_field_item_container">
                       <label>Reps</label>
                       <Field
+                        type="number"
                         name={`results[${index}].repetitions`}
                         value={result.repetitions}
                         onChange={handleChange} />
@@ -71,6 +73,7 @@ const WorkoutForm = () => {
                     <div className="workout_field_item_container">
                       <label>Sets</label>
                       <Field
+                        type="number"
                         name={`results[${index}].sets`}
                         value={result.sets}
                         onChange={handleChange} />

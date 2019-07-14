@@ -71,6 +71,7 @@ nav a {
 }
 
 /* Maybe use element only instead of class? */
+
 .button {
   align-items: center;
   color: white;
@@ -107,7 +108,7 @@ nav a {
 
 /* Workout .js */
 
-.centered_form{
+.centered_form {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -116,11 +117,11 @@ nav a {
 
 .workout_field_container {
   align-items: flex-start;
-  border: 2px solid tomato;
+  background-color: rgb(155, 155, 155);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
   display: flex;
   flex-direction: column;
-  max-width: 300px;
-  padding: 10px;
+  padding: 20px;
 }
 
 .workout_field_item_container {
@@ -129,13 +130,17 @@ nav a {
   margin-bottom: 10px;
 }
 
-input {
-  border: none;
-  padding: 5px;
+.workout_field_item_container label {
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
-input, option {
-  width: 100%;
+input {
+  background-color: white;
+  border: none;
+  font-size: 1em;
+  max-width: 100%;
+  padding: 10px;
 }
 
 /* Workout .js */
@@ -162,4 +167,9 @@ input, option {
     justify-content: center;
   }
   /* Auth */
+  /* Workout */
+  input {
+    font-size: 1.2em;
+  }
+  /* Workout */
 }
