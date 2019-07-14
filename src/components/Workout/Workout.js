@@ -17,14 +17,14 @@ const WorkoutForm = () => {
       }}>
 
       {({ values, handleChange }) => (
-        <Form>
+        <Form className="centered_form">
           <FieldArray name="results">{({ push }) => (
             <Fragment>
               {values.results.map((result, index) => {
                 return (
-                  <Fragment key={index}>
-                    <div>
-                      <label>Choose discipline</label>
+                  <div className="workout_field_container" key={index}>
+                    <div className="workout_field_item_container">
+                      <label>Discipline</label>
                       <Field
                         component="select"
                         name={`results[${index}].name`}
@@ -38,7 +38,7 @@ const WorkoutForm = () => {
                       </Field>
                     </div>
 
-                    <div>
+                    <div className="workout_field_item_container">
                       <label>Equipment type</label>
                       <Field
                         component="select"
@@ -52,7 +52,7 @@ const WorkoutForm = () => {
                       </Field>
                     </div>
 
-                    <div>
+                    <div className="workout_field_item_container">
                       <label>Weight (kg)</label>
                       <Field
                         name={`results[${index}].weight`}
@@ -60,7 +60,7 @@ const WorkoutForm = () => {
                         onChange={handleChange} />
                     </div>
 
-                    <div>
+                    <div className="workout_field_item_container">
                       <label>Reps</label>
                       <Field
                         name={`results[${index}].repetitions`}
@@ -68,14 +68,14 @@ const WorkoutForm = () => {
                         onChange={handleChange} />
                     </div>
 
-                    <div>
+                    <div className="workout_field_item_container">
                       <label>Sets</label>
                       <Field
                         name={`results[${index}].sets`}
                         value={result.sets}
                         onChange={handleChange} />
                     </div>
-                  </Fragment>
+                  </div>
                 )
               })}
 
