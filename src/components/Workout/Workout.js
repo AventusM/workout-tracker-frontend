@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createWorkout } from '../../reducers/workouts'
 import { Formik, FieldArray, Form, Field } from 'formik'
@@ -130,34 +130,67 @@ const WorkoutForm = () => {
   )
 }
 
+// Add date when made
 const WorkoutList = () => {
-  const { data, loaded } = useSelector(state => state.workouts)
+  const { data, loaded, createdAt } = useSelector(state => state.workouts)
   return (loaded &&
-    <div>
+    <div className="workout_list_container">
       {data.map(workout =>
         <SingleWorkout
           key={workout._id}
-          results={workout.results} />
+          results={workout.results}
+          createdAt={workout.createdAt}
+        />
       )}
     </div>
   )
 }
 
 const SingleWorkout = (props) => {
-  const { results } = props
+  const [visible, setVisible] = useState(false)
+  const { results, createdAt } = props
+
+  const toggleVisibility = () => {
+    setVisible(!visible)
+  }
+
+  const dateData = new Date(createdAt)
   return (
-    <ul className="single_workout_results">
-      {results.map(result =>
-        <SingleWorkoutResults
-          key={result._id}
-          name={result.name}
-          type={result.type}
-          weight={result.weight}
-          repetitions={result.repetitions}
-          sets={result.sets}
-        />
-      )}
-    </ul>
+    <Fragment>
+      <WorkoutToggleComponent toggleVisibility={toggleVisibility} visible={visible} dateData={dateData} />
+      {visible &&
+        <ul className="single_workout_results_container">
+          {results.map(result =>
+            <SingleWorkoutResults
+              key={result._id}
+              name={result.name}
+              type={result.type}
+              weight={result.weight}
+              repetitions={result.repetitions}
+              sets={result.sets}
+            />
+          )}
+        </ul>}
+    </Fragment>
+  )
+}
+
+const WorkoutToggleComponent = (props) => {
+  const { toggleVisibility, visible, dateData } = props
+
+  const dateOfMonth = dateData.getUTCDate()
+  const month = dateData.getMonth()
+  const year = dateData.getFullYear()
+
+  return (
+    <div className="workout_list_toggle_container" onClick={() => toggleVisibility()}>
+      <p>
+        {dateOfMonth}.{month} {year}
+      </p>
+      <FontAwesomeIcon
+        icon={visible ? faAngleUp : faAngleDown}
+        size="lg" />
+    </div>
   )
 }
 
@@ -182,7 +215,7 @@ const SingleWorkoutResultsCondensed = (props) => {
         <b>{name}</b>
         <b>{type}</b>
       </div>
-      
+
       <div className="weight_reps_sets_container">
 
         <div className="weight_reps_sets_item">

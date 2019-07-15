@@ -181,6 +181,17 @@ nav a {
   margin-bottom: 5px;
 }
 
+.workout_list_container {
+  background-color: rgb(155, 155, 155);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.single_workout_results_container {
+  border: 3px solid green;
+}
+
 input {
   background-color: white;
   border: none;
@@ -214,6 +225,18 @@ input {
 }
 
 .weight_reps_sets_item {
+  margin-right: 10px;
+}
+
+.workout_list_toggle_container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.workout_list_toggle_container p {
   margin-right: 10px;
 }
 
