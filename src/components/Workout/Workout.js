@@ -15,9 +15,8 @@ const WorkoutForm = () => {
       onSubmit={(values) => {
 
         // MAP OUT VISIBILITY PROP
-        // MAP OUT VISIBILITY PROP
-        // MAP OUT VISIBILITY PROP
-        dispatch(createWorkout({ results: values.results }))
+        const resultsWithoutVisibleProp = values.results.map(({ visible, ...rest }) => rest)
+        dispatch(createWorkout({ results: resultsWithoutVisibleProp }))
       }}>
 
       {({ values, handleChange, setFieldValue }) => (
@@ -27,10 +26,10 @@ const WorkoutForm = () => {
               {values.results.map((result, index) => {
                 return (
                   <div className="workout_field_container" key={index}>
-                    {/* DONT SHOW IF RESULTS LENGTH 1 */}                  
+                    {/* DONT SHOW IF RESULTS LENGTH 1 */}
                     <div className="remove_and_hide_or_show_buttons_container">
                       <p onClick={() => remove(index)}>X</p>
-                      <p onClick={() => setFieldValue(`results[${index}].visible`, !result.visible)}>{result.visible? 'visible' : 'hidden'}</p>
+                      <p onClick={() => setFieldValue(`results[${index}].visible`, !result.visible)}>{result.visible ? 'visible' : 'hidden'}</p>
                     </div>
 
                     <div className="workout_field_item_container">
@@ -102,7 +101,7 @@ const WorkoutForm = () => {
           <button className="form_submit_button" type="submit">submit</button>
         </Form>
       )}
-    </Formik>
+    </Formik >
   )
 }
 
