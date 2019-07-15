@@ -2,6 +2,8 @@ import React, { Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createWorkout } from '../../reducers/workouts'
 import { Formik, FieldArray, Form, Field } from 'formik'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleDown, faAngleUp, faPlusSquare, faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
 
 // TODO -- CLEAR VALUES ON SUBMIT
@@ -13,6 +15,9 @@ const WorkoutForm = () => {
   return (
     <Formik initialValues={{ results: [{ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0, visible: true }] }}
       onSubmit={(values) => {
+        // THROW IN AN ALERT OF DATA TO BE SENT
+        // THROW IN AN ALERT OF DATA TO BE SENT
+        // THROW IN AN ALERT OF DATA TO BE SENT
 
         // MAP OUT VISIBILITY PROP
         const resultsWithoutVisibleProp = values.results.map(({ visible, ...rest }) => rest)
@@ -28,72 +33,93 @@ const WorkoutForm = () => {
                   <div className="workout_field_container" key={index}>
                     {/* DONT SHOW IF RESULTS LENGTH 1 */}
                     <div className="remove_and_hide_or_show_buttons_container">
-                      <p onClick={() => remove(index)}>X</p>
-                      <p onClick={() => setFieldValue(`results[${index}].visible`, !result.visible)}>{result.visible ? 'visible' : 'hidden'}</p>
+                      <FontAwesomeIcon
+                        onClick={() => remove(index)}
+                        icon={faWindowClose}
+                        size="lg" />
+                      <FontAwesomeIcon
+                        onClick={() => setFieldValue(`results[${index}].visible`, !result.visible)}
+                        icon={result.visible ? faAngleUp : faAngleDown}
+                        size="lg" />
                     </div>
 
-                    <div className="workout_field_item_container">
-                      <label>Discipline</label>
-                      <Field
-                        component="select"
-                        name={`results[${index}].name`}
-                        value={result.name}
-                        onChange={handleChange}>
-                        <option disabled selected label=" ">-- select an option --</option>
-                        <option value="Bench press">Bench press</option>
-                        <option value="Military press">Military press</option>
-                        <option value="Deadlift">Deadlift</option>
-                        <option value="Squat">Squat</option>
-                      </Field>
-                    </div>
+                    {!result.visible
+                      ? <Fragment>
+                        <SingleWorkoutResults
+                          className="form_single_result"
+                          name={result.name}
+                          type={result.type}
+                          weight={result.weight}
+                          repetitions={result.repetitions}
+                          sets={result.sets}
+                        />
+                      </Fragment>
+                      : <Fragment>
+                        <div className="workout_field_item_container">
+                          <label>Discipline</label>
+                          <Field
+                            component="select"
+                            name={`results[${index}].name`}
+                            value={result.name}
+                            onChange={handleChange}>
+                            <option disabled selected label=" ">-- select an option --</option>
+                            <option value="Bench press">Bench press</option>
+                            <option value="Military press">Military press</option>
+                            <option value="Deadlift">Deadlift</option>
+                            <option value="Squat">Squat</option>
+                          </Field>
+                        </div>
 
-                    <div className="workout_field_item_container">
-                      <label>Equipment type</label>
-                      <Field
-                        component="select"
-                        name={`results[${index}].type`}
-                        value={result.type}
-                        onChange={handleChange}>
-                        <option disabled selected label=" ">-- select an option --</option>
-                        <option value="Barbell">Barbell</option>
-                        <option value="Dumbbell">Dumbbell</option>
-                        <option value="Machine">Machine</option>
-                      </Field>
-                    </div>
+                        <div className="workout_field_item_container">
+                          <label>Equipment type</label>
+                          <Field
+                            component="select"
+                            name={`results[${index}].type`}
+                            value={result.type}
+                            onChange={handleChange}>
+                            <option disabled selected label=" ">-- select an option --</option>
+                            <option value="Barbell">Barbell</option>
+                            <option value="Dumbbell">Dumbbell</option>
+                            <option value="Machine">Machine</option>
+                          </Field>
+                        </div>
 
-                    <div className="workout_field_item_container">
-                      <label>Weight (kg)</label>
-                      <Field
-                        type="number"
-                        name={`results[${index}].weight`}
-                        value={result.weight}
-                        onChange={handleChange} />
-                    </div>
+                        <div className="workout_field_item_container">
+                          <label>Weight (kg)</label>
+                          <Field
+                            type="number"
+                            name={`results[${index}].weight`}
+                            value={result.weight}
+                            onChange={handleChange} />
+                        </div>
 
-                    <div className="workout_field_item_container">
-                      <label>Reps</label>
-                      <Field
-                        type="number"
-                        name={`results[${index}].repetitions`}
-                        value={result.repetitions}
-                        onChange={handleChange} />
-                    </div>
+                        <div className="workout_field_item_container">
+                          <label>Reps</label>
+                          <Field
+                            type="number"
+                            name={`results[${index}].repetitions`}
+                            value={result.repetitions}
+                            onChange={handleChange} />
+                        </div>
 
-                    <div className="workout_field_item_container">
-                      <label>Sets</label>
-                      <Field
-                        type="number"
-                        name={`results[${index}].sets`}
-                        value={result.sets}
-                        onChange={handleChange} />
-                    </div>
+                        <div className="workout_field_item_container">
+                          <label>Sets</label>
+                          <Field
+                            type="number"
+                            name={`results[${index}].sets`}
+                            value={result.sets}
+                            onChange={handleChange} />
+                        </div>
+                      </Fragment>
+                    }
                   </div>
                 )
               })}
 
               {/* Push requires default values i guess... */}
-              <button type="button" onClick={() => push({ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0, visible: false })}>
-                add to list
+              <button className="add_workout_to_list_button" type="button" onClick={() => push({ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0, visible: true })}>
+                add another
+                <FontAwesomeIcon icon={faPlusSquare} />
               </button>
             </div>
           )}
@@ -107,7 +133,6 @@ const WorkoutForm = () => {
 
 const WorkoutList = () => {
   const { data, loaded } = useSelector(state => state.workouts)
-  console.log('data', data)
   return (loaded &&
     <div>
       {data.map(workout =>
@@ -121,7 +146,6 @@ const WorkoutList = () => {
 
 const SingleWorkout = (props) => {
   const { results } = props
-  console.log('results', results)
   return (
     <ul>
       {results.map(result =>
@@ -139,10 +163,9 @@ const SingleWorkout = (props) => {
 }
 
 const SingleWorkoutResults = (props) => {
-  const { name, type, weight, repetitions, sets } = props
-  console.log('props within single workout', props)
+  const { className, name, type, weight, repetitions, sets } = props
   return (
-    <li>
+    <li className={className}>
       <div>Discipline: {name}</div>
       <div>Type: {type}</div>
       <div>Weight: {weight}kg</div>

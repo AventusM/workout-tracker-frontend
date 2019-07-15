@@ -115,10 +115,22 @@ nav a {
   justify-content: center;
 }
 
+.remove_and_hide_or_show_buttons_container {
+  /* background-color: white; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
 .workout_field_and_button_container {
   background-color: rgb(155, 155, 155);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
   padding: 20px;
+}
+
+.form_single_result {
+  width: 180px;
 }
 
 /* Should be add to list button */
@@ -132,6 +144,12 @@ nav a {
   padding: 10px;
   text-transform: uppercase;
   width: 100%;
+}
+
+.add_workout_to_list_button {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
 
 .workout_field_container {
