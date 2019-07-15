@@ -11,18 +11,28 @@ const WorkoutForm = () => {
   const dispatch = useDispatch()
 
   return (
-    <Formik initialValues={{ results: [{name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0}] }}
+    <Formik initialValues={{ results: [{ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0, visible: true }] }}
       onSubmit={(values) => {
+
+        // MAP OUT VISIBILITY PROP
+        // MAP OUT VISIBILITY PROP
+        // MAP OUT VISIBILITY PROP
         dispatch(createWorkout({ results: values.results }))
       }}>
 
-      {({ values, handleChange }) => (
+      {({ values, handleChange, setFieldValue }) => (
         <Form className="centered_form">
-          <FieldArray name="results">{({ push }) => (
+          <FieldArray name="results">{({ push, remove }) => (
             <div className="workout_field_and_button_container">
               {values.results.map((result, index) => {
                 return (
                   <div className="workout_field_container" key={index}>
+                    {/* DONT SHOW IF RESULTS LENGTH 1 */}                  
+                    <div className="remove_and_hide_or_show_buttons_container">
+                      <p onClick={() => remove(index)}>X</p>
+                      <p onClick={() => setFieldValue(`results[${index}].visible`, !result.visible)}>{result.visible? 'visible' : 'hidden'}</p>
+                    </div>
+
                     <div className="workout_field_item_container">
                       <label>Discipline</label>
                       <Field
@@ -83,7 +93,7 @@ const WorkoutForm = () => {
               })}
 
               {/* Push requires default values i guess... */}
-              <button type="button" onClick={() => push({ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0 })}>
+              <button type="button" onClick={() => push({ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0, visible: false })}>
                 add to list
               </button>
             </div>
