@@ -86,13 +86,13 @@ nav a {
 
 .login_button {
   background: transparent;
-  border: 2px solid rgb(42, 42, 196);
+  border: 2px solid rgb(93, 93, 212);
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.55);
 }
 
 .register_button {
-  background: rgb(42, 42, 196);
-  border: 2px solid rgb(42, 42, 196);
+  background-color: rgb(93, 93, 212);
+  border: 2px solid rgb(93, 93, 212);
   margin-right: 15px;
 }
 
@@ -110,11 +110,9 @@ nav a {
 
 .centered_form {
   align-items: center;
-  border: 2px solid tomato;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* max-width: 300px; */
 }
 
 .workout_field_and_button_container {
@@ -124,6 +122,7 @@ nav a {
 }
 
 /* Should be add to list button */
+
 .workout_field_and_button_container button {
   background-color: white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
@@ -158,6 +157,18 @@ input {
   padding: 10px;
 }
 
+.form_submit_button {
+  background-color: rgb(93, 93, 212);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-weight: 600;
+  margin-top: 5px;
+  padding: 10px;
+  text-transform: uppercase;
+  width: 220px;
+}
+
 /* Workout .js */
 
 @media screen and (max-width: 600px) {
@@ -182,9 +193,4 @@ input {
     justify-content: center;
   }
   /* Auth */
-  /* Workout */
-  input {
-    font-size: 1.2em;
-  }
-  /* Workout */
 }

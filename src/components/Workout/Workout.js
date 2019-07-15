@@ -89,10 +89,7 @@ const WorkoutForm = () => {
             </div>
           )}
           </FieldArray>
-          <button type="submit">submit</button>
-          <pre>
-            {JSON.stringify(values, null, 2)}
-          </pre>
+          <button className="form_submit_button" type="submit">submit</button>
         </Form>
       )}
     </Formik>
