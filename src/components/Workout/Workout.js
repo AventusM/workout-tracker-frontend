@@ -45,8 +45,7 @@ const WorkoutForm = () => {
 
                     {!result.visible
                       ? <Fragment>
-                        <SingleWorkoutResults
-                          className="form_single_result"
+                        <SingleWorkoutResultsCondensed
                           name={result.name}
                           type={result.type}
                           weight={result.weight}
@@ -147,7 +146,7 @@ const WorkoutList = () => {
 const SingleWorkout = (props) => {
   const { results } = props
   return (
-    <ul>
+    <ul className="single_workout_results">
       {results.map(result =>
         <SingleWorkoutResults
           key={result._id}
@@ -163,14 +162,45 @@ const SingleWorkout = (props) => {
 }
 
 const SingleWorkoutResults = (props) => {
-  const { className, name, type, weight, repetitions, sets } = props
+  const { name, type, weight, repetitions, sets } = props
   return (
-    <li className={className}>
+    <li>
       <div>Discipline: {name}</div>
       <div>Type: {type}</div>
       <div>Weight: {weight}kg</div>
       <div>Reps: {repetitions}</div>
       <div>Sets: {sets}</div>
+    </li>
+  )
+}
+
+const SingleWorkoutResultsCondensed = (props) => {
+  const { name, type, weight, repetitions, sets } = props
+  return (
+    <li className="form_single_result">
+      <div className="form_single_result_name_type_container">
+        <b>{name}</b>
+        <b>{type}</b>
+      </div>
+      
+      <div className="weight_reps_sets_container">
+
+        <div className="weight_reps_sets_item">
+          <p>Weight</p>
+          <b>{weight}kg</b>
+        </div>
+
+        <div className="weight_reps_sets_item">
+          <p>Reps</p>
+          <b>{repetitions}</b>
+        </div>
+
+        <div className="weight_reps_sets_item">
+          <p>Sets</p>
+          <b>{sets}</b>
+        </div>
+      </div>
+
     </li>
   )
 }
