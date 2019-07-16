@@ -8,8 +8,8 @@ import { fetchWorkouts } from './reducers/workouts'
 import { fetchQuotes } from './reducers/quotes'
 // SHOULD BE CHANGED TO GET JUST ONE
 // SHOULD BE CHANGED TO GET JUST ONE
-
-import { WorkoutForm, WorkoutList } from './components/Workout/Workout'
+import { WorkoutForm } from './components/Workout/Form'
+import { WorkoutList } from './components/Workout/List'
 import { NavBar } from './components/Navbar/Navbar'
 import { NonAuthIndex } from './components/Index/NonAuthIndex'
 

@@ -1,6 +1,7 @@
-import React, { Fragment, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { Fragment } from 'react'
+import { useDispatch } from 'react-redux'
 import { createWorkout } from '../../reducers/workouts'
+import { SingleWorkoutResultsCondensed } from './List'
 import { Formik, FieldArray, Form, Field } from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp, faPlusSquare, faWindowClose } from '@fortawesome/free-solid-svg-icons'
@@ -29,8 +30,13 @@ const WorkoutForm = () => {
           <FieldArray name="results">{({ push, remove }) => (
             <div className="workout_field_and_button_container">
               {values.results.map((result, index) => {
+                console.log('result info', result)
                 return (
                   <div className="workout_field_container" key={index}>
+
+                    {/* DONT SHOW IF RESULTS LENGTH 1 */}
+                    {/* DONT SHOW IF RESULTS LENGTH 1 */}
+                    {/* DONT SHOW IF RESULTS LENGTH 1 */}
                     {/* DONT SHOW IF RESULTS LENGTH 1 */}
                     <div className="remove_and_hide_or_show_buttons_container">
                       <FontAwesomeIcon
@@ -84,6 +90,10 @@ const WorkoutForm = () => {
                         </div>
 
                         <div className="workout_field_item_container">
+                          <button type="button" onClick={() => console.log('SOMETHING WILL GET CHANGED HERE')}>ADD SET INFO</button>
+                        </div>
+
+                        {/* <div className="workout_field_item_container">
                           <label>Weight (kg)</label>
                           <Field
                             type="number"
@@ -108,7 +118,7 @@ const WorkoutForm = () => {
                             name={`results[${index}].sets`}
                             value={result.sets}
                             onChange={handleChange} />
-                        </div>
+                        </div> */}
                       </Fragment>
                     }
                   </div>
@@ -117,7 +127,7 @@ const WorkoutForm = () => {
 
               {/* Push requires default values i guess... */}
               <button className="add_workout_to_list_button" type="button" onClick={() => push({ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0, visible: true })}>
-                add another
+                add discipline
                 <FontAwesomeIcon icon={faPlusSquare} />
               </button>
             </div>
@@ -130,119 +140,4 @@ const WorkoutForm = () => {
   )
 }
 
-// Add date when made
-const WorkoutList = () => {
-  const { data, loaded, createdAt } = useSelector(state => state.workouts)
-  return (loaded &&
-    <div className="workout_list_container">
-      {data.map(workout =>
-        <SingleWorkout
-          key={workout._id}
-          results={workout.results}
-          createdAt={workout.createdAt}
-        />
-      )}
-    </div>
-  )
-}
-
-const SingleWorkout = (props) => {
-  const [visible, setVisible] = useState(false)
-  const { results, createdAt } = props
-
-  const toggleVisibility = () => {
-    setVisible(!visible)
-  }
-
-  const dateData = new Date(createdAt)
-  return (
-    <div className="single_workout_and_toggle_component_container">
-      <WorkoutToggleComponent toggleVisibility={toggleVisibility} visible={visible} dateData={dateData} />
-      {visible &&
-        <ul className="single_workout_container">
-          {results.map(result =>
-            <SingleWorkoutResults
-              key={result._id}
-              name={result.name}
-              type={result.type}
-              weight={result.weight}
-              repetitions={result.repetitions}
-              sets={result.sets}
-            />
-          )}
-        </ul>}
-    </div>
-  )
-}
-
-const WorkoutToggleComponent = (props) => {
-  const { toggleVisibility, visible, dateData } = props
-
-  const dateOfMonth = dateData.getUTCDate()
-  const month = dateData.getMonth()
-  const year = dateData.getFullYear()
-
-  return (
-    <div className="workout_list_toggle_container" onClick={() => toggleVisibility()}>
-      <p>
-        {dateOfMonth}.{month} {year}
-      </p>
-      <FontAwesomeIcon
-        icon={visible ? faAngleUp : faAngleDown}
-        size="lg" />
-    </div>
-  )
-}
-
-const SingleWorkoutResults = (props) => {
-  const { name, type, weight, repetitions, sets } = props
-  return (
-    <li className="single_workout_item">
-      <b>{name}</b>
-      <b>{type}</b>
-    </li>
-  )
-}
-
-const SingleWorkoutResultsCondensed = (props) => {
-  const { name, type, weight, repetitions, sets } = props
-  return (
-    <li className="form_single_result">
-      <div className="form_single_result_name_type_container">
-        <b>{name}</b>
-        <b>{type}</b>
-      </div>
-
-      <div className="weight_reps_sets_container">
-
-        <div className="weight_reps_sets_item">
-          <p>Weight</p>
-          <b>{weight}kg</b>
-        </div>
-
-        <div className="weight_reps_sets_item">
-          <p>Reps</p>
-          <b>{repetitions}</b>
-        </div>
-
-        <div className="weight_reps_sets_item">
-          <p>Sets</p>
-          <b>{sets}</b>
-        </div>
-      </div>
-
-    </li>
-  )
-}
-
-const YearMonthDataPicker = () => {
-  return (
-    <Fragment>
-      <div>OPTION</div>
-      <div>OPTION</div>
-      <div>GO BUTTON</div>
-    </Fragment>
-  )
-}
-
-export { WorkoutForm, WorkoutList }
+export { WorkoutForm }
