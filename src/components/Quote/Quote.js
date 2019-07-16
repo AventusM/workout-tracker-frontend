@@ -6,7 +6,7 @@ const Quote = () => {
   return (
     <Fragment>
       {!loaded && <Fragment>Loading...</Fragment>}
-      {loaded && <h1 className="quote">{data.quote} by {data.by}</h1>}
+      {loaded && <h1 className="title_text_shadow">{data.quote} by {data.by}</h1>}
     </Fragment>
   )
 }

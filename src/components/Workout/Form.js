@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createWorkout } from '../../reducers/workouts'
 import { openWorkoutModal } from '../../reducers/modal'
 import { SingleWorkoutResultsCondensed } from './List'
@@ -7,6 +7,18 @@ import { Formik, FieldArray, Form, Field } from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp, faPlusSquare, faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
+
+const WorkoutSetModal = () => {
+  const { show } = useSelector(state => state.modal)
+  const dispatch = useDispatch()
+
+  return (
+    <Fragment>
+      {!show && <button onClick={() => dispatch(openWorkoutModal())}>CLICKY</button>}
+      {show && <div>MODAL GOES HERE</div>}
+    </Fragment>
+  )
+}
 
 // TODO -- CLEAR VALUES ON SUBMIT
 // TODO -- CLEAR VALUES ON SUBMIT
@@ -33,11 +45,6 @@ const WorkoutForm = () => {
               {values.results.map((result, index) => {
                 return (
                   <div className="workout_field_container" key={index}>
-
-                    {/* DONT SHOW IF RESULTS LENGTH 1 */}
-                    {/* DONT SHOW IF RESULTS LENGTH 1 */}
-                    {/* DONT SHOW IF RESULTS LENGTH 1 */}
-                    {/* DONT SHOW IF RESULTS LENGTH 1 */}
                     <div className="remove_and_hide_or_show_buttons_container">
                       <FontAwesomeIcon
                         onClick={() => remove(index)}
@@ -88,11 +95,10 @@ const WorkoutForm = () => {
                         </div>
 
                         <div className="workout_field_item_container">
-                          {/* FIGURE OUT HOW TO CONNECT setFieldValue with modal */}
-                          {/* FIGURE OUT HOW TO CONNECT setFieldValue with modal */}
-                          {/* FIGURE OUT HOW TO CONNECT setFieldValue with modal */}
-                          {/* FIGURE OUT HOW TO CONNECT setFieldValue with modal */}
-                          <button type="button" onClick={() => dispatch(openWorkoutModal())}>ADD SET INFO</button>
+                          <Field
+                            name="sets"
+                            component={WorkoutSetModal}
+                          />
                         </div>
 
                         {/* <div className="workout_field_item_container">
@@ -112,15 +118,7 @@ const WorkoutForm = () => {
                             value={result.repetitions}
                             onChange={handleChange} />
                         </div>
-
-                        <div className="workout_field_item_container">
-                          <label>Sets</label>
-                          <Field
-                            type="number"
-                            name={`results[${index}].sets`}
-                            value={result.sets}
-                            onChange={handleChange} />
-                        </div> */}
+                      */}
                       </Fragment>
                     }
                   </div>

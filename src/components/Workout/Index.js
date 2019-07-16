@@ -8,10 +8,10 @@ const WorkoutCreator = () => {
 
   return (
     <Fragment>
-      <h1>Submit a workout</h1>
+      <h1 className="title_text_shadow centered_text">Submit a workout</h1>
       <WorkoutForm />
       {/* Modal will move within WorkoutForm for setFieldResult to work */}
-      {show && <WorkoutSetModal />}
+      {/* {show && <WorkoutSetModal />} */}
     </Fragment>
   )
 }
