@@ -77,7 +77,8 @@ const SingleWorkoutResults = (props) => {
 }
 
 const SingleWorkoutResultsCondensed = (props) => {
-  const { name, type, weight, repetitions, sets } = props
+  const { name, type, sets } = props
+  console.log('sets data', sets)
   return (
     <li className="form_single_result">
       <div className="form_single_result_name_type_container">
@@ -85,7 +86,7 @@ const SingleWorkoutResultsCondensed = (props) => {
         <b>{type}</b>
       </div>
 
-      <div className="weight_reps_sets_container">
+      {/* <div className="weight_reps_sets_container">
 
         <div className="weight_reps_sets_item">
           <p>Weight</p>
@@ -101,7 +102,7 @@ const SingleWorkoutResultsCondensed = (props) => {
           <p>Sets</p>
           <b>{sets}</b>
         </div>
-      </div>
+      </div> */}
 
     </li>
   )

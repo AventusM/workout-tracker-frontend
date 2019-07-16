@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux'
 import { createWorkout } from '../../reducers/workouts'
+import { openWorkoutModal } from '../../reducers/modal'
 import { SingleWorkoutResultsCondensed } from './List'
 import { Formik, FieldArray, Form, Field } from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,7 +15,7 @@ const WorkoutForm = () => {
   const dispatch = useDispatch()
 
   return (
-    <Formik initialValues={{ results: [{ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0, visible: true }] }}
+    <Formik initialValues={{ results: [{ name: 'Bench press', type: 'Barbell', sets: [], visible: true }] }}
       onSubmit={(values) => {
         // THROW IN AN ALERT OF DATA TO BE SENT
         // THROW IN AN ALERT OF DATA TO BE SENT
@@ -30,7 +31,6 @@ const WorkoutForm = () => {
           <FieldArray name="results">{({ push, remove }) => (
             <div className="workout_field_and_button_container">
               {values.results.map((result, index) => {
-                console.log('result info', result)
                 return (
                   <div className="workout_field_container" key={index}>
 
@@ -54,8 +54,6 @@ const WorkoutForm = () => {
                         <SingleWorkoutResultsCondensed
                           name={result.name}
                           type={result.type}
-                          weight={result.weight}
-                          repetitions={result.repetitions}
                           sets={result.sets}
                         />
                       </Fragment>
@@ -90,7 +88,13 @@ const WorkoutForm = () => {
                         </div>
 
                         <div className="workout_field_item_container">
-                          <button type="button" onClick={() => console.log('SOMETHING WILL GET CHANGED HERE')}>ADD SET INFO</button>
+                          <button type="button" onClick={() => {
+                            // 1. MODAL WILL GO IN HERE TO COLLECT DATA
+                            // 2. DATA GETS PUSHED TO EXISTING RESULT
+                            // const mockData = { weight: 100, repetitions: 1 }
+                            dispatch(openWorkoutModal())
+                            // setFieldValue(`results[${index}].sets`, result.sets.concat(mockData))
+                          }}>ADD SET INFO</button>
                         </div>
 
                         {/* <div className="workout_field_item_container">

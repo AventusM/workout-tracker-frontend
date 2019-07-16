@@ -258,6 +258,16 @@ input {
 
 /* Workout .js */
 
+/* Modal */
+
+.modal {
+  background-color: green;
+  max-width: 400px;
+  height: 200px;
+}
+
+/* Modal */
+
 @media screen and (max-width: 600px) {
   /* Navbar */
   .navbar_title_desktop {
