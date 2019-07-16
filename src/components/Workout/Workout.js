@@ -156,10 +156,10 @@ const SingleWorkout = (props) => {
 
   const dateData = new Date(createdAt)
   return (
-    <Fragment>
+    <div className="single_workout_and_toggle_component_container">
       <WorkoutToggleComponent toggleVisibility={toggleVisibility} visible={visible} dateData={dateData} />
       {visible &&
-        <ul className="single_workout_results_container">
+        <ul className="single_workout_container">
           {results.map(result =>
             <SingleWorkoutResults
               key={result._id}
@@ -171,7 +171,7 @@ const SingleWorkout = (props) => {
             />
           )}
         </ul>}
-    </Fragment>
+    </div>
   )
 }
 

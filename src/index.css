@@ -182,14 +182,14 @@ nav a {
 }
 
 .workout_list_container {
-  background-color: rgb(155, 155, 155);
+  /* border: 3px solid tomato; */
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.single_workout_results_container {
-  border: 3px solid green;
+.single_workout_container {
+  background-color: rgb(155, 155, 155);
 }
 
 input {
@@ -228,16 +228,24 @@ input {
   margin-right: 10px;
 }
 
+.single_workout_and_toggle_component_container{
+  margin-bottom: 10px;
+}
+
 .workout_list_toggle_container {
   align-items: center;
+  background-color: rgb(155, 155, 155);
   display: flex;
   flex-direction: row;
   font-size: 1.5em;
   font-weight: 600;
+  max-width: 300px;
+  padding: 10px;
 }
 
 .workout_list_toggle_container p {
-  margin-right: 10px;
+  /* Pushes icon to as right as possible */
+  margin-right: auto;
 }
 
 /* Workout .js */
