@@ -197,12 +197,9 @@ const WorkoutToggleComponent = (props) => {
 const SingleWorkoutResults = (props) => {
   const { name, type, weight, repetitions, sets } = props
   return (
-    <li style={{ border: '3px solid tomato' }}>
-      <div>Discipline: {name}</div>
-      <div>Type: {type}</div>
-      <div>Weight: {weight}kg</div>
-      <div>Reps: {repetitions}</div>
-      <div>Sets: {sets}</div>
+    <li className="single_workout_item">
+      <b>{name}</b>
+      <b>{type}</b>
     </li>
   )
 }
@@ -235,6 +232,16 @@ const SingleWorkoutResultsCondensed = (props) => {
       </div>
 
     </li>
+  )
+}
+
+const YearMonthDataPicker = () => {
+  return (
+    <Fragment>
+      <div>OPTION</div>
+      <div>OPTION</div>
+      <div>GO BUTTON</div>
+    </Fragment>
   )
 }
 

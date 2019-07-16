@@ -190,8 +190,14 @@ nav a {
 
 .single_workout_container {
   display: grid;
+  grid-gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  border: 3px solid green;
+}
+
+.single_workout_item {
+  background-color: rgb(155, 155, 155);
+  height: 100px;
+  padding: 10px;
 }
 
 input {
