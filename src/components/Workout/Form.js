@@ -88,13 +88,11 @@ const WorkoutForm = () => {
                         </div>
 
                         <div className="workout_field_item_container">
-                          <button type="button" onClick={() => {
-                            // 1. MODAL WILL GO IN HERE TO COLLECT DATA
-                            // 2. DATA GETS PUSHED TO EXISTING RESULT
-                            // const mockData = { weight: 100, repetitions: 1 }
-                            dispatch(openWorkoutModal())
-                            // setFieldValue(`results[${index}].sets`, result.sets.concat(mockData))
-                          }}>ADD SET INFO</button>
+                          {/* FIGURE OUT HOW TO CONNECT setFieldValue with modal */}
+                          {/* FIGURE OUT HOW TO CONNECT setFieldValue with modal */}
+                          {/* FIGURE OUT HOW TO CONNECT setFieldValue with modal */}
+                          {/* FIGURE OUT HOW TO CONNECT setFieldValue with modal */}
+                          <button type="button" onClick={() => dispatch(openWorkoutModal())}>ADD SET INFO</button>
                         </div>
 
                         {/* <div className="workout_field_item_container">

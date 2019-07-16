@@ -1,12 +1,13 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { closeWorkoutModal } from '../../reducers/modal'
 
 
 const WorkoutSetModal = () => {
-  const show = useSelector(state => state.modal)
-  console.log('show status', show)
-  return (show &&
-    <div>
+  const dispatch = useDispatch()
+
+  return (
+    <div onClick={() => dispatch(closeWorkoutModal())} className="modal">
       WORKOUT MODAL FOR INDIVIDUAL SET
     </div>
   )

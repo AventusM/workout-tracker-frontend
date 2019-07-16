@@ -8,7 +8,7 @@ import { fetchWorkouts } from './reducers/workouts'
 import { fetchQuotes } from './reducers/quotes'
 // SHOULD BE CHANGED TO GET JUST ONE
 // SHOULD BE CHANGED TO GET JUST ONE
-import { WorkoutForm } from './components/Workout/Form'
+import { WorkoutCreator } from './components/Workout/Index'
 import { WorkoutList } from './components/Workout/List'
 import { NavBar } from './components/Navbar/Navbar'
 import { NonAuthIndex } from './components/Index/NonAuthIndex'
@@ -27,7 +27,7 @@ const App = () => {
       <NavBar />
       <div className="container">
         <Route exact path="/" component={NonAuthIndex} />
-        <Route exact path="/create" component={WorkoutForm} />
+        <Route exact path="/create" component={WorkoutCreator} />
         <Route exact path="/workouts" component={WorkoutList} />
       </div>
     </Router>
