@@ -197,7 +197,7 @@ const WorkoutToggleComponent = (props) => {
 const SingleWorkoutResults = (props) => {
   const { name, type, weight, repetitions, sets } = props
   return (
-    <li>
+    <li style={{ border: '3px solid tomato' }}>
       <div>Discipline: {name}</div>
       <div>Type: {type}</div>
       <div>Weight: {weight}kg</div>

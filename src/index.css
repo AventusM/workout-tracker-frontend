@@ -14,6 +14,7 @@ body {
 
 ul, li {
   list-style-type: none;
+  padding: 0;
 }
 
 /* App */
@@ -135,7 +136,6 @@ nav a {
 
 .form_single_result {
   background-color: rgba(0, 0, 0, 0.55);
-  margin-bottom: 10px;
   padding: 10px;
   width: 180px;
 }
@@ -189,7 +189,9 @@ nav a {
 }
 
 .single_workout_container {
-  background-color: rgb(155, 155, 155);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  border: 3px solid green;
 }
 
 input {
@@ -228,7 +230,7 @@ input {
   margin-right: 10px;
 }
 
-.single_workout_and_toggle_component_container{
+.single_workout_and_toggle_component_container {
   margin-bottom: 10px;
 }
 
