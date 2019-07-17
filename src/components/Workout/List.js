@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
@@ -92,27 +92,30 @@ const SingleWorkoutResultsCondensed = (props) => {
 
 const WorkoutSetList = (props) => {
   const { sets } = props
-
   // condition added to save some space as even an empty array takes some
   return (sets.length > 0 &&
-    <ul>
-      {sets.map((set, index) => (
-        <WorkoutSet
-          key={index}
-          weight={set.weight}
-          repetitions={set.repetitions}
-        />
-      ))}
-    </ul>
+    <Fragment>
+      <ul>
+        {sets.map((set, index) => (
+          <WorkoutSet
+            key={index}
+            index={index + 1}
+            weight={set.weight}
+            repetitions={set.repetitions}
+          />
+        ))}
+      </ul>
+    </Fragment>
   )
 }
 
 const WorkoutSet = (props) => {
-  const { weight, repetitions } = props
+  const { index, weight, repetitions } = props
   return (
-    <li>
-      <div>{weight} kg</div>
-      <div>{repetitions} reps</div>
+    <li className="workout_set_data_container">
+      <p>#{index}</p>
+      <p>{weight} kg</p>
+      <p>{repetitions} reps</p>
     </li>
   )
 }

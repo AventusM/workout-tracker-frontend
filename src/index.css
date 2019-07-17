@@ -286,6 +286,18 @@ input {
   margin-right: auto;
 }
 
+.workout_set_data_container {
+  border-top: 2px solid white;
+  display: flex;
+  flex-direction: row;
+  font-weight: 600;
+  padding: 5px 0px;
+}
+
+.workout_set_data_container p {
+  margin-right: 5px;
+}
+
 /* Workout .js */
 
 /* Modal */
