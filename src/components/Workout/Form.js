@@ -5,7 +5,7 @@ import { openWorkoutModal, closeWorkoutModal } from '../../reducers/modal'
 import { SingleWorkoutResultsCondensed } from './List'
 import { Formik, FieldArray, Form, Field } from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown, faAngleUp, faPlusSquare, faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faAngleUp, faPlusSquare, faWindowClose, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 
 const WorkoutSetModal = (props) => {
@@ -14,14 +14,14 @@ const WorkoutSetModal = (props) => {
   const dispatch = useDispatch()
 
   const addSetToResult = () => {
-    const updatedSets = result.sets.concat({weight: result.weight, repetitions: result.repetitions})
+    const updatedSets = result.sets.concat({ weight: result.weight, repetitions: result.repetitions })
     setFieldValue(`results[${index}].sets`, updatedSets)
     dispatch(closeWorkoutModal())
   }
 
   return (
     <Fragment>
-      {!show && <button onClick={() => dispatch(openWorkoutModal())}>add a set</button>}
+      {!show && <button type="button" className="add_a_set_button" onClick={() => dispatch(openWorkoutModal())}>add a set</button>}
       {show &&
         <Fragment>
           <div className="workout_field_item_container">
@@ -41,9 +41,15 @@ const WorkoutSetModal = (props) => {
               value={result.repetitions}
               onChange={handleChange} />
           </div>
-          <button type="button" onClick={addSetToResult}>
-            confirm
-          </button>
+          <div className="confirm_or_cancel_set_addition_container">
+            <button className="confirm_set_button" type="button" onClick={addSetToResult}>
+              confirm
+            </button>
+            <button className="cancel_set_button" type="button" onClick={() => dispatch(closeWorkoutModal())}>
+              cancel
+            </button>
+          </div>
+
         </Fragment>}
     </Fragment>
   )
@@ -122,6 +128,11 @@ const WorkoutForm = () => {
                             <option value="Machine">Machine</option>
                           </Field>
                         </div>
+
+                        {/* LIST SETS HERE IN BETWEEN BUTTON AND OPTIONS */}
+                        {/* LIST SETS HERE IN BETWEEN BUTTON AND OPTIONS */}
+                        {/* LIST SETS HERE IN BETWEEN BUTTON AND OPTIONS */}
+                        {/* LIST SETS HERE IN BETWEEN BUTTON AND OPTIONS */}
 
                         <div className="workout_field_item_container">
                           <Field
