@@ -154,21 +154,21 @@ nav a {
 }
 
 .confirm_or_cancel_set_addition_container button {
+  border: none;
   color: white;
 }
 
 .confirm_set_button {
-  background-color: rgb(238, 95, 95);
+  background-color: rgb(66, 173, 66);
 }
 
 .cancel_set_button {
-  background-color: rgb(66, 173, 66);
+  background-color: rgb(238, 95, 95);
 }
 
 /* Should be add to list button */
 
 .workout_field_and_button_container button {
-  border: none;
   font-weight: 600;
   padding: 10px;
   text-transform: uppercase;
@@ -176,12 +176,18 @@ nav a {
 }
 
 .add_a_set_button {
-  background-color: white;
+  background-color: transparent;
+  border: none;
+  color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .add_workout_to_list_button {
   align-items: center;
-  background-color: white;
+  background-color: transparent;
+  border: 2px solid rgb(93, 93, 212);
+  color: white;
   display: flex;
   justify-content: space-between;
 }

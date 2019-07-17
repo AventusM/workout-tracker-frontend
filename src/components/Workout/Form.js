@@ -2,10 +2,10 @@ import React, { Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createWorkout } from '../../reducers/workouts'
 import { openWorkoutModal, closeWorkoutModal } from '../../reducers/modal'
-import { SingleWorkoutResultsCondensed } from './List'
+import { SingleWorkoutResultsCondensed, WorkoutSetList } from './List'
 import { Formik, FieldArray, Form, Field } from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown, faAngleUp, faPlusSquare, faWindowClose, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faAngleUp, faPlusSquare, faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
 
 const WorkoutSetModal = (props) => {
@@ -130,8 +130,9 @@ const WorkoutForm = () => {
                         </div>
 
                         {/* LIST SETS HERE IN BETWEEN BUTTON AND OPTIONS */}
-                        {/* LIST SETS HERE IN BETWEEN BUTTON AND OPTIONS */}
-                        {/* LIST SETS HERE IN BETWEEN BUTTON AND OPTIONS */}
+                        {/* RENDERED ONLY IF RESULT HAS ANY SETS. OTHERWISE TAKES SPACE */}
+                        <WorkoutSetList sets={result.sets} />
+                        {/* RENDERED ONLY IF RESULT HAS ANY SETS. OTHERWISE TAKES SPACE */}
                         {/* LIST SETS HERE IN BETWEEN BUTTON AND OPTIONS */}
 
                         <div className="workout_field_item_container">
@@ -150,7 +151,7 @@ const WorkoutForm = () => {
                 )
               })}
               <button className="add_workout_to_list_button" type="button" onClick={() => push({ name: 'Bench press', type: 'Barbell', sets: [], weight: 0, repetitions: 0, visible: true })}>
-                add discipline
+                add result
                 <FontAwesomeIcon icon={faPlusSquare} />
               </button>
             </div>

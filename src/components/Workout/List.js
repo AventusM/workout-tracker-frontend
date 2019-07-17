@@ -84,17 +84,26 @@ const SingleWorkoutResultsCondensed = (props) => {
       <div className="form_single_result_name_type_container">
         <b>{name}</b>
         <b>{type}</b>
-        <ul>
-          {sets.map((set, index) => (
-            <WorkoutSet
-              key={index}
-              weight={set.weight}
-              repetitions={set.repetitions}
-            />
-          ))}
-        </ul>
+        <WorkoutSetList sets={sets} />
       </div>
     </li>
+  )
+}
+
+const WorkoutSetList = (props) => {
+  const { sets } = props
+
+  // condition added to save some space as even an empty array takes some
+  return (sets.length > 0 &&
+    <ul>
+      {sets.map((set, index) => (
+        <WorkoutSet
+          key={index}
+          weight={set.weight}
+          repetitions={set.repetitions}
+        />
+      ))}
+    </ul>
   )
 }
 
@@ -108,4 +117,4 @@ const WorkoutSet = (props) => {
   )
 }
 
-export { WorkoutList, SingleWorkoutResultsCondensed }
+export { WorkoutList, WorkoutSetList, SingleWorkoutResultsCondensed }
