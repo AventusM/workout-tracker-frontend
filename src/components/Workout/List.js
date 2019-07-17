@@ -85,25 +85,6 @@ const SingleWorkoutResultsCondensed = (props) => {
         <b>{name}</b>
         <b>{type}</b>
       </div>
-
-      {/* <div className="weight_reps_sets_container">
-
-        <div className="weight_reps_sets_item">
-          <p>Weight</p>
-          <b>{weight}kg</b>
-        </div>
-
-        <div className="weight_reps_sets_item">
-          <p>Reps</p>
-          <b>{repetitions}</b>
-        </div>
-
-        <div className="weight_reps_sets_item">
-          <p>Sets</p>
-          <b>{sets}</b>
-        </div>
-      </div> */}
-
     </li>
   )
 }

@@ -1,21 +1,50 @@
 import React, { Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createWorkout } from '../../reducers/workouts'
-import { openWorkoutModal } from '../../reducers/modal'
+import { openWorkoutModal, closeWorkoutModal } from '../../reducers/modal'
 import { SingleWorkoutResultsCondensed } from './List'
 import { Formik, FieldArray, Form, Field } from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp, faPlusSquare, faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
 
-const WorkoutSetModal = () => {
+const WorkoutSetModal = (props) => {
+  const { index, result, handleChange, setFieldValue } = props
   const { show } = useSelector(state => state.modal)
   const dispatch = useDispatch()
 
+  const addSetToResult = () => {
+    const updatedSets = result.sets.concat({weight: result.weight, repetitions: result.repetitions})
+    setFieldValue(`results[${index}].sets`, updatedSets)
+    dispatch(closeWorkoutModal())
+  }
+
   return (
     <Fragment>
-      {!show && <button onClick={() => dispatch(openWorkoutModal())}>CLICKY</button>}
-      {show && <div>MODAL GOES HERE</div>}
+      {!show && <button onClick={() => dispatch(openWorkoutModal())}>add a set</button>}
+      {show &&
+        <Fragment>
+          <div className="workout_field_item_container">
+            <label>Weight (kg)</label>
+            <Field
+              type="number"
+              name={`results[${index}].weight`}
+              value={result.weight}
+              onChange={handleChange} />
+          </div>
+
+          <div className="workout_field_item_container">
+            <label>Reps</label>
+            <Field
+              type="number"
+              name={`results[${index}].repetitions`}
+              value={result.repetitions}
+              onChange={handleChange} />
+          </div>
+          <button type="button" onClick={addSetToResult}>
+            confirm
+          </button>
+        </Fragment>}
     </Fragment>
   )
 }
@@ -27,7 +56,7 @@ const WorkoutForm = () => {
   const dispatch = useDispatch()
 
   return (
-    <Formik initialValues={{ results: [{ name: 'Bench press', type: 'Barbell', sets: [], visible: true }] }}
+    <Formik initialValues={{ results: [{ name: 'Bench press', type: 'Barbell', sets: [], weight: 0, repetitions: 0, visible: true }] }}
       onSubmit={(values) => {
         // THROW IN AN ALERT OF DATA TO BE SENT
         // THROW IN AN ALERT OF DATA TO BE SENT
@@ -97,36 +126,19 @@ const WorkoutForm = () => {
                         <div className="workout_field_item_container">
                           <Field
                             name="sets"
+                            index={index}
+                            result={result}
+                            handleChange={handleChange}
                             component={WorkoutSetModal}
+                            setFieldValue={setFieldValue}
                           />
                         </div>
-
-                        {/* <div className="workout_field_item_container">
-                          <label>Weight (kg)</label>
-                          <Field
-                            type="number"
-                            name={`results[${index}].weight`}
-                            value={result.weight}
-                            onChange={handleChange} />
-                        </div>
-
-                        <div className="workout_field_item_container">
-                          <label>Reps</label>
-                          <Field
-                            type="number"
-                            name={`results[${index}].repetitions`}
-                            value={result.repetitions}
-                            onChange={handleChange} />
-                        </div>
-                      */}
                       </Fragment>
                     }
                   </div>
                 )
               })}
-
-              {/* Push requires default values i guess... */}
-              <button className="add_workout_to_list_button" type="button" onClick={() => push({ name: 'Bench press', type: 'Barbell', weight: 0, repetitions: 0, sets: 0, visible: true })}>
+              <button className="add_workout_to_list_button" type="button" onClick={() => push({ name: 'Bench press', type: 'Barbell', sets: [], weight: 0, repetitions: 0, visible: true })}>
                 add discipline
                 <FontAwesomeIcon icon={faPlusSquare} />
               </button>
