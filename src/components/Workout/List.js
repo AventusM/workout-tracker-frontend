@@ -84,7 +84,24 @@ const SingleWorkoutResultsCondensed = (props) => {
       <div className="form_single_result_name_type_container">
         <b>{name}</b>
         <b>{type}</b>
+        <ul>{sets.map((set, index) => (
+          <WorkoutSet
+            key={index}
+            weight={set.weight}
+            repetitions={set.repetitions}
+          />
+        ))}</ul>
       </div>
+    </li>
+  )
+}
+
+const WorkoutSet = (props) => {
+  const { weight, repetitions } = props
+  return (
+    <li>
+      <div>{weight} kg</div>
+      <div>{repetitions} reps</div>
     </li>
   )
 }
