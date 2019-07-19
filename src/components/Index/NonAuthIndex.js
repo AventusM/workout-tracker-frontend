@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Quote } from '../Quote/Quote'
-import { Register } from '../Auth/Register'
-import { Login } from '../Auth/Login'
+import { RegisterButton } from '../Auth/Register'
+import { LoginButton } from '../Auth/Login'
 
 const NonAuthIndex = () => {
   return (
@@ -15,8 +15,8 @@ const NonAuthIndex = () => {
 const NonAuthButtons = () => {
   return (
     <div className="non_auth_button_container">
-      <Register />
-      <Login />
+      <RegisterButton />
+      <LoginButton />
     </div>
   )
 }
