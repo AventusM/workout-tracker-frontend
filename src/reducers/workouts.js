@@ -3,7 +3,7 @@ import { BASE_URL } from '../constants/workout/url'
 import workoutService from '../services/index' // Can be named whatever. workoutService is fitting here though.
 
 const initialState = {
-  loaded: false,
+  loading_workouts: true,
   data: []
 }
 
@@ -13,7 +13,7 @@ const workoutReducer = (state = initialState, action) => {
     case FETCH_ALL: {
       return {
         ...state,
-        loaded: true,
+        loading_workouts: false,
         data: action.data
       }
     }

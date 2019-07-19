@@ -1,8 +1,9 @@
 import { LOG_IN, LOG_OUT, SET_USER } from '../constants/auth/types'
-import { LOGIN_URL, CURRENT_USER_URL } from '../constants/auth/url'
+import { LOGIN_URL, CURRENT_USER_URL, LOGOUT_URL } from '../constants/auth/url'
 import authService from '../services/index'
 
 const initialState = {
+  loading_user: true,
   logged_in: false,
   user: null
 }
@@ -13,13 +14,15 @@ const authReducer = (state = initialState, action) => {
     case SET_USER: {
       return {
         ...state,
-        logged_in: true, // App.js runs effect once at beginning. This is check for cookies on refresh etc.
+        loading_user: false,
+        logged_in: action.logged_in,
         user: action.user
       }
     }
     case LOG_IN: {
       return {
         ...state,
+        loading_user: false,
         logged_in: true
       }
     }
@@ -36,24 +39,32 @@ const authReducer = (state = initialState, action) => {
 
 export const login = (credentials) => {
   return async (dispatch) => {
-    console.log('credentials', credentials)
     //1. perform login (auth controller)
     await authService.create(LOGIN_URL, credentials)
     //2.1. If succesful (newUser data is valid) -> dispatch logged in true
-    //2.2. If unsuccesful (server returns error etc?) then dispatch with null?
+    //2.2. If unsuccesful (server returns error etc?) then simply return here
 
     dispatch({ type: LOG_IN })
+  }
+}
+
+export const logout = () => {
+  return async (dispatch) => {
+    await authService.getAll(LOGOUT_URL)
+    dispatch({ type: LOG_OUT })
   }
 }
 
 export const setUser = () => {
   return async (dispatch) => {
     const userData = await authService.getAll(CURRENT_USER_URL)
-    if (!userData._id) return
-    
+    // console.log('user data', userData)
+    const loginStatus = userData.hasOwnProperty('_id') ? true : false
+    // console.log('login status', loginStatus)
     dispatch({
       type: SET_USER,
-      user: userData
+      user: userData,
+      logged_in: loginStatus
     })
   }
 }

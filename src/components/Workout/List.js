@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 
 const WorkoutList = () => {
-  const { data, loaded } = useSelector(state => state.workouts)
-  return (loaded &&
+  const { data, loading_workouts } = useSelector(state => state.workouts)
+  return (!loading_workouts &&
     <div className="workout_list_container">
       {data.map(workout =>
         <SingleWorkout

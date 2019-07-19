@@ -1,12 +1,15 @@
 import React, { Fragment } from 'react'
 import { Formik, Form, Field } from 'formik'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../reducers/auth'
 
 const LoginIndex = () => {
+  const { user } = useSelector(state => state.auth)
   return (
     <Fragment>
+      {/* This seems to be the way to redirect to index if user has been set */}
+      {user && <Redirect to="/" />}
       <h1>Log into existing account</h1>
       <LoginForm />
     </Fragment>
@@ -33,8 +36,14 @@ const LoginForm = () => {
         }}>
         {props =>
           <Form className="login_form" onSubmit={props.handleSubmit}>
-            <Field name="username" type="text" onChange={props.handleChange} value={props.values.username} />
-            <Field name="password" type="password" onChange={props.handleChange} value={props.values.password} />
+            <section>
+              <label>Username</label>
+              <Field name="username" type="text" onChange={props.handleChange} value={props.values.username} />
+            </section>
+            <section>
+              <label>Password</label>
+              <Field name="password" type="password" onChange={props.handleChange} value={props.values.password} />
+            </section>
             <button type="submit">Log in</button>
           </Form>
         }
