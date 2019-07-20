@@ -12,15 +12,14 @@ import { fetchQuotes } from './reducers/quotes'
 import { WorkoutCreator } from './components/Workout/Index'
 import { WorkoutList } from './components/Workout/List'
 import { NavBar } from './components/Navbar/Navbar'
-import { NonAuthIndex } from './components/Index/NonAuthIndex'
-import { AuthIndex } from './components/Index/AuthIndex'
+import { Index } from './components/Index/Index'
 import { LoginIndex } from './components/Auth/Login'
 import { RegisterIndex } from './components/Auth/Register'
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
 
 const App = () => {
   const dispatch = useDispatch()
-  const { logged_in, user, loading_user } = useSelector(state => state.auth)
+  const { logged_in, loading_user } = useSelector(state => state.auth)
   const { loading_workouts } = useSelector(state => state.workouts)
   // Should probably remain here
   useEffect(() => {
@@ -46,7 +45,7 @@ const App = () => {
     <Router>
       <NavBar />
       <div className="container">
-        <Route exact path="/" component={user ? AuthIndex : NonAuthIndex} />
+        <Route exact path="/" component={Index} />
         <Route exact path="/login" component={LoginIndex} />
         <Route exact path="/register" component={RegisterIndex} />
 

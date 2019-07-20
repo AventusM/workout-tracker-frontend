@@ -69,8 +69,8 @@ const WorkoutForm = () => {
         // THROW IN AN ALERT OF DATA TO BE SENT
 
         // MAP OUT VISIBILITY PROP
-        const resultsWithoutVisibleProp = values.results.map(({ visible, ...rest }) => rest)
-        dispatch(createWorkout({ results: resultsWithoutVisibleProp }))
+        const resultsWithoutUnneededProps = values.results.map(({ visible, weight, repetitions, ...rest }) => rest)
+        dispatch(createWorkout({ results: resultsWithoutUnneededProps }))
       }}>
 
       {({ values, handleChange, setFieldValue }) => (
