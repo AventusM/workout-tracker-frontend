@@ -16,6 +16,7 @@ import { NonAuthIndex } from './components/Index/NonAuthIndex'
 import { AuthIndex } from './components/Index/AuthIndex'
 import { LoginIndex } from './components/Auth/Login'
 import { RegisterIndex } from './components/Auth/Register'
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -50,8 +51,8 @@ const App = () => {
         <Route exact path="/register" component={RegisterIndex} />
 
         {/* Routes below should be private routes. Check with redux auth situation to determine whether redirect is needed to non auth routes */}
-        <Route exact path="/create" component={WorkoutCreator} />
-        <Route exact path="/workouts" component={WorkoutList} />
+        <ProtectedRoute exact path="/create" component={WorkoutCreator} />
+        <ProtectedRoute exact path="/workouts" component={WorkoutList} />
       </div>
     </Router>
   )
