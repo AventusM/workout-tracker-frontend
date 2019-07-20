@@ -29,7 +29,8 @@ const authReducer = (state = initialState, action) => {
     case LOG_OUT: {
       return {
         ...state,
-        logged_in: false
+        logged_in: false,
+        user: null
       }
     }
     default:
@@ -58,13 +59,10 @@ export const logout = () => {
 export const setUser = () => {
   return async (dispatch) => {
     const userData = await authService.getAll(CURRENT_USER_URL)
-    // console.log('user data', userData)
-    const loginStatus = userData.hasOwnProperty('_id') ? true : false
-    // console.log('login status', loginStatus)
     dispatch({
       type: SET_USER,
-      user: userData,
-      logged_in: loginStatus
+      user: userData.hasOwnProperty('message') ? null : userData,
+      logged_in: userData.hasOwnProperty('message') ? false : true
     })
   }
 }
