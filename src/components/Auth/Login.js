@@ -36,11 +36,11 @@ const LoginForm = () => {
         }}>
         {props =>
           <Form className="login_form" onSubmit={props.handleSubmit}>
-            <section>
+            <section className="login_form_field_container">
               <label>Username</label>
               <Field name="username" type="text" onChange={props.handleChange} value={props.values.username} />
             </section>
-            <section>
+            <section className="login_form_field_container">
               <label>Password</label>
               <Field name="password" type="password" onChange={props.handleChange} value={props.values.password} />
             </section>
